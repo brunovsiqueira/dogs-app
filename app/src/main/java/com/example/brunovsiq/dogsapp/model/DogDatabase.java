@@ -1,0 +1,31 @@
+package com.example.brunovsiq.dogsapp.model;
+
+import android.content.Context;
+
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+
+@Database(entities = {DogBreed.class}, version = 1)
+public abstract class DogDatabase extends RoomDatabase {
+
+    //Singleton
+
+    private static DogDatabase instance;
+
+    public static DogDatabase getInstance(Context context) {
+        if (instance == null) {
+            instance = Room.databaseBuilder(
+                    context.getApplicationContext(),
+                    DogDatabase.class,
+                    "dogdatabase")
+                    .build();
+            return instance;
+        } else {
+            return instance;
+        }
+    }
+
+    public abstract DogDAO dogDAO();
+
+}
